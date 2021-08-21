@@ -3,7 +3,6 @@ package application;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import boardgame.Board;
 import chess.ChessException;
 import chess.ChessMatch;
 import chess.ChessPiece;
@@ -30,10 +29,10 @@ public class Program {
 				ChessPiece capturedPiece = chessMatch.performeChessMove(souce, target);
 			} catch (ChessException e) {
 				System.out.println(e.getMessage());
-				sc.hasNextLine();
+				sc.nextLine();
 			} catch (InputMismatchException e) {
 				System.out.println(e.getMessage());
-				sc.hasNextLine();
+				sc.nextLine();
 			}
 		}
 	}

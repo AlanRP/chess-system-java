@@ -7,7 +7,7 @@ public abstract class Piece {
 
 	public Piece(Board board) {
 		this.board = board;
-		position = null; // row not necessary
+		position = null; // not necessary
 	}
 
 	protected Board getBoard() {
