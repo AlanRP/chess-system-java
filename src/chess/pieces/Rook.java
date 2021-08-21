@@ -22,42 +22,32 @@ public class Rook extends ChessPiece{
 		
 		Position p = new Position(0, 0);
 		
-		// above
-		p.setValues(position.getRow() -1, position.getColumn());
-		while (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
-			mat[p.getRow()][p.getColumn()] = true;
-			p.setRow(p.getRow() - 1);
+		// for (i, j) -> scan all possible position for Rook
+		//  0, -1 -> left
+		//  0,  1 -> right
+		// -1,  0 -> Above
+		//  1,  0 -> below
+		
+		for(int i = -1; i <= 1; i++) {
+			for(int j = -1; j <= 1; j++) {
+				
+				if (i != 0 && j !=0) {
+					continue;
+				}
+				
+				p.setValues(position.getRow() + i, position.getColumn() + j);
+
+				while (getBoard().positionExists(p) && !isThereMyPiece(p)) {
+					mat[p.getRow()][p.getColumn()] = true;
+					
+					if(getBoard().positionExists(p) && getBoard().thereIsAPiece(p)) {
+						break;
+					}
+					p.setValues(p.getRow() + i, p.getColumn() + j);
+					
+				}
+			}
 		}
-		if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
-			mat[p.getRow()][p.getColumn()] = true;
-		}		
-		// left
-		p.setValues(position.getRow(), position.getColumn() - 1);
-		while (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
-			mat[p.getRow()][p.getColumn()] = true;
-			p.setColumn(p.getColumn() - 1);
-		}
-		if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
-			mat[p.getRow()][p.getColumn()] = true;
-		}	
-		// right
-		p.setValues(position.getRow(), position.getColumn() + 1);
-		while (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
-			mat[p.getRow()][p.getColumn()] = true;
-			p.setColumn(p.getColumn() + 1);
-		}
-		if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
-			mat[p.getRow()][p.getColumn()] = true;
-		}
-		// below
-		p.setValues(position.getRow() + 1, position.getColumn());
-		while (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
-			mat[p.getRow()][p.getColumn()] = true;
-			p.setRow(p.getRow() + 1);
-		}
-		if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
-			mat[p.getRow()][p.getColumn()] = true;
-		}		
 		
 		return mat;
 	}
